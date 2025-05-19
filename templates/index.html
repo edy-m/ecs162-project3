@@ -172,6 +172,10 @@
                             {% if not comment['root'] %}
                                 <div class="comment">
                                     <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    <form method="POST" action="{{ url_for('delete', id=comment['_id']) }}">
+                                        <input type="submit" value="Delete Comment "
+                                            onclick="return confirm('Are you sure??')">
+                                    </form>
                                     {% for reply in comments['1'] %}
                                         {% if reply['root'] == comment['_id'] %}
                                             <div class="reply">

@@ -4,6 +4,7 @@ from authlib.common.security import generate_token
 import os
 from pymongo import MongoClient
 from collections import defaultdict
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
@@ -89,6 +90,11 @@ def post_comment():
 
     COMMENTS.insert_one(comment)
 
+    return redirect('/')
+
+@app.post('/<id>/delete/')
+def delete(id):
+    COMMENTS.delete_one({"_id": ObjectId(id)})
     return redirect('/')
 
 if __name__ == '__main__':
