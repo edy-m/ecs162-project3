@@ -46,6 +46,7 @@
                 (https://www.w3schools.com/css/css_navbar.asp)
                 -->
             <!-- nav bar under page title, includes contents of page-->
+            <!-- dex login prompt taken from starter code-->
             <nav>
                 <div>Top Stories</div>
                 <div>Local</div>
@@ -140,12 +141,32 @@
                         });
                     </script>
 
+                    <!-- digital ocean - for help and inspiration regarding syntax/structure and functionality
+                        with html forms and how to call a function within a form
+                        https://www.digitalocean.com/community/tutorials/how-to-use-mongodb-in-a-flask-application
+                        -->
+                    <!-- form that uses the post-comment function that I made,
+                        we assign an article value to identify which comments to display under which articles-->
                     <form method="POST" action="/post-comment">
                         <input type="hidden" name="articleNum" value="1">
                         <input type="text" name="comment" placeholder="Share your thoughts">
                         <button type="submit">Submit Comment</button>
                     </form>
 
+                    <!-- digital ocean - syntax/structure help for implementing the below html
+                        such as showing comments and how to implement the delete comment function in the html;
+                        https://www.digitalocean.com/community/tutorials/how-to-use-mongodb-in-a-flask-application
+                        -->
+                    
+                    <!-- COMMENT SECTION HTML CODE
+                        For EACH article we loop through all the comments with that article id/number
+                        if that comment is a normal comment and not a reply, we continue with the logic
+                        if the comment was removed display the removed comment line
+                        else display the comment with the username
+                        if we're a moderator then we will be shown the option of deleting comments
+                        if a reply hasnt been removed then we give the option of replying to a comment/reply
+                        if no comments match the article's id/num then we say no comments yet
+                        repeat for each article adjusting the sections with the articleNum-->
                     <h3>Comments</h3>
                     <div id="commentsSection1">
                         {% for comment in comments['1'] %}
