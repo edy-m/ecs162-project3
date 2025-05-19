@@ -1,25 +1,5 @@
-<!--
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <title>The New York Times</title>
-        <link rel="stylesheet" href="../static/style.css">
-    </head>
-    <script src="../static/main.js"></script>
-    <body>
-        {% if user %}
-            <h2>Logged in as {{ user['email'] }}</h2>
-            <a href="/logout">Logout</a>
-        {% else %}
-            <a href="/login">Login with Dex</a>
-        {% endif %}
-    </body>
-
-    <footer>
-    </footer>
--->
 <!DOCTYPE html>
-<html lang="ca">
+<html lang="en">
     <!--
         lecture 2 and 3 slides from class - syntax, formatting, and general structure for implementing html
         and css functionality
@@ -72,7 +52,7 @@
                 <div>Sacramento/Davis</div>
                 
                 {% if user %}
-                    <h7>Logged in as {{ user['email'] }}</h7>
+                    <h2>Logged in as {{ user['email'] }}</h2>
                     <a href="/logout">Logout</a>
                 {% else %}
                     <a href="/login">Login with Dex</a>
@@ -162,12 +142,12 @@
 
                     <form method="POST" action="/post-comment">
                         <input type="hidden" name="articleNum" value="1">
-                        <input type="text" name="comment" placeholder="Share your thoughts"></input>
+                        <input type="text" name="comment" placeholder="Share your thoughts">
                         <button type="submit">Submit Comment</button>
                     </form>
 
                     <h3>Comments</h3>
-                    <div id="commentsSection">
+                    <div id="commentsSection1">
                         {% for comment in comments['1'] %}
                             {% if not comment['root'] %}
                                 <div class="comment">
@@ -203,7 +183,7 @@
                                         <form method="POST" action="/post-comment">
                                             <input type="hidden" name="articleNum" value="1">
                                             <input type="hidden" name="root" value="{{ comment['_id'] }}">
-                                            <input type="text" name="comment" placeholder="reply."></input>
+                                            <input type="text" name="comment" placeholder="reply.">
                                             <button type="submit">Reply</button>
                                         </form>
                                     {% endif %}
@@ -260,12 +240,12 @@
 
                     <form method="POST" action="/post-comment">
                         <input type="hidden" name="articleNum" value="4">
-                        <input type="text" name="comment" placeholder="Share your thoughts"></input>
+                        <input type="text" name="comment" placeholder="Share your thoughts">
                         <button type="submit">Submit Comment</button>
                     </form>
 
                     <h3>Comments</h3>
-                    <div id="commentsSection">
+                    <div id="commentsSection4">
                         {% for comment in comments['4'] %}
                             {% if not comment['root'] %}
                                 <div class="comment">
@@ -299,9 +279,9 @@
                                     {% endfor %}
                                     {%if not comment['removed'] %}
                                         <form method="POST" action="/post-comment">
-                                            <input type="hidden" name="articleNum" value="1">
+                                            <input type="hidden" name="articleNum" value="4">
                                             <input type="hidden" name="root" value="{{ comment['_id'] }}">
-                                            <input type="text" name="comment" placeholder="reply."></input>
+                                            <input type="text" name="comment" placeholder="reply.">
                                             <button type="submit">Reply</button>
                                         </form>
                                     {% endif %}
@@ -355,12 +335,12 @@
 
                     <form method="POST" action="/post-comment">
                         <input type="hidden" name="articleNum" value="2">
-                        <input type="text" name="comment" placeholder="Share your thoughts"></input>
+                        <input type="text" name="comment" placeholder="Share your thoughts">
                         <button type="submit">Submit Comment</button>
                     </form>
 
                     <h3>Comments</h3>
-                    <div id="commentsSection">
+                    <div id="commentsSection2">
                         {% for comment in comments['2'] %}
                             {% if not comment['root'] %}
                                 <div class="comment">
@@ -394,9 +374,9 @@
                                     {% endfor %}
                                     {%if not comment['removed'] %}
                                         <form method="POST" action="/post-comment">
-                                            <input type="hidden" name="articleNum" value="1">
+                                            <input type="hidden" name="articleNum" value="2">
                                             <input type="hidden" name="root" value="{{ comment['_id'] }}">
-                                            <input type="text" name="comment" placeholder="reply."></input>
+                                            <input type="text" name="comment" placeholder="reply.">
                                             <button type="submit">Reply</button>
                                         </form>
                                     {% endif %}
@@ -447,12 +427,12 @@
 
                     <form method="POST" action="/post-comment">
                         <input type="hidden" name="articleNum" value="5">
-                        <input type="text" name="comment" placeholder="Share your thoughts"></input>
+                        <input type="text" name="comment" placeholder="Share your thoughts">
                         <button type="submit">Submit Comment</button>
                     </form>
 
                     <h3>Comments</h3>
-                    <div id="commentsSection">
+                    <div id="commentsSection5">
                         {% for comment in comments['5'] %}
                             {% if not comment['root'] %}
                                 <div class="comment">
@@ -486,9 +466,9 @@
                                     {% endfor %}
                                     {%if not comment['removed'] %}
                                         <form method="POST" action="/post-comment">
-                                            <input type="hidden" name="articleNum" value="1">
+                                            <input type="hidden" name="articleNum" value="5">
                                             <input type="hidden" name="root" value="{{ comment['_id'] }}">
-                                            <input type="text" name="comment" placeholder="reply."></input>
+                                            <input type="text" name="comment" placeholder="reply.">
                                             <button type="submit">Reply</button>
                                         </form>
                                     {% endif %}
@@ -541,12 +521,12 @@
 
                     <form method="POST" action="/post-comment">
                         <input type="hidden" name="articleNum" value="3">
-                        <input type="text" name="comment" placeholder="Share your thoughts"></input>
+                        <input type="text" name="comment" placeholder="Share your thoughts">
                         <button type="submit">Submit Comment</button>
                     </form>
 
                     <h3>Comments</h3>
-                    <div id="commentsSection">
+                    <div id="commentsSection3">
                         {% for comment in comments['3'] %}
                             {% if not comment['root'] %}
                                 <div class="comment">
@@ -580,9 +560,9 @@
                                     {% endfor %}
                                     {%if not comment['removed'] %}
                                         <form method="POST" action="/post-comment">
-                                            <input type="hidden" name="articleNum" value="1">
+                                            <input type="hidden" name="articleNum" value="3">
                                             <input type="hidden" name="root" value="{{ comment['_id'] }}">
-                                            <input type="text" name="comment" placeholder="reply."></input>
+                                            <input type="text" name="comment" placeholder="reply.">
                                             <button type="submit">Reply</button>
                                         </form>
                                     {% endif %}
@@ -633,12 +613,12 @@
 
                     <form method="POST" action="/post-comment">
                         <input type="hidden" name="articleNum" value="6">
-                        <input type="text" name="comment" placeholder="Share your thoughts"></input>
+                        <input type="text" name="comment" placeholder="Share your thoughts">
                         <button type="submit">Submit Comment</button>
                     </form>
 
                     <h3>Comments</h3>
-                    <div id="commentsSection">
+                    <div id="commentsSection6">
                         {% for comment in comments['6'] %}
                             {% if not comment['root'] %}
                                 <div class="comment">
@@ -672,9 +652,9 @@
                                     {% endfor %}
                                     {%if not comment['removed'] %}
                                         <form method="POST" action="/post-comment">
-                                            <input type="hidden" name="articleNum" value="1">
+                                            <input type="hidden" name="articleNum" value="6">
                                             <input type="hidden" name="root" value="{{ comment['_id'] }}">
-                                            <input type="text" name="comment" placeholder="reply."></input>
+                                            <input type="text" name="comment" placeholder="reply.">
                                             <button type="submit">Reply</button>
                                         </form>
                                     {% endif %}
