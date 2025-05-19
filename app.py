@@ -85,7 +85,8 @@ def post_comment():
         "user_name": user.get('name'),
         "comment": commentContent,
         "articleNum": articleNum,
-        "root": root
+        "root": root,
+        "removed": False
     }
 
     COMMENTS.insert_one(comment)
@@ -94,7 +95,8 @@ def post_comment():
 
 @app.post('/<id>/delete/')
 def delete(id):
-    COMMENTS.delete_one({"_id": ObjectId(id)})
+    #COMMENTS.delete_one({"_id": ObjectId(id)})
+    COMMENTS.update_one({"_id": ObjectId(id)}, {"$set": {'comment': "comment was removed by moderator", 'removed': True}})
     return redirect('/')
 
 if __name__ == '__main__':

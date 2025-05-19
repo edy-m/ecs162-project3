@@ -171,8 +171,12 @@
                         {% for comment in comments['1'] %}
                             {% if not comment['root'] %}
                                 <div class="comment">
-                                    <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
-                                    {% if user and user['name'] == 'moderator' %}
+                                    {% if comment['removed'] %}
+                                        {{ comment['comment'] }}
+                                    {% else %}
+                                        <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% endif %}
+                                    {% if not comment['removed'] and user and user['name'] == 'moderator' %}
                                         <form method="POST" action="{{ url_for('delete', id=comment['_id']) }}">
                                             <input type="submit" value="Delete Comment "
                                                 onclick="return confirm('Are you sure??')">
@@ -181,22 +185,28 @@
                                     {% for reply in comments['1'] %}
                                         {% if reply['root'] == comment['_id'] %}
                                             <div class="reply">
-                                                <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
-                                                {% if user and user['name'] == 'moderator' %}
-                                                    <form method="POST" action="{{ url_for('delete', id=reply['_id']) }}">
-                                                        <input type="submit" value="Delete Reply "
-                                                            onclick="return confirm('Are you sure??')">
-                                                    </form>
+                                                {% if reply['removed'] %}
+                                                    {{ reply['comment'] }}
+                                                {% else %}
+                                                    <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                                    {% if user and user['name'] == 'moderator' %}
+                                                        <form method="POST" action="{{ url_for('delete', id=reply['_id']) }}">
+                                                            <input type="submit" value="Delete Reply "
+                                                                onclick="return confirm('Are you sure??')">
+                                                        </form>
+                                                    {% endif %}
                                                 {% endif %}
                                             </div>
                                         {% endif %}
                                     {% endfor %}
-                                    <form method="POST" action="/post-comment">
-                                        <input type="hidden" name="articleNum" value="1">
-                                        <input type="hidden" name="root" value="{{ comment['_id'] }}">
-                                        <input type="text" name="comment" placeholder="reply."></input>
-                                        <button type="submit">Reply</button>
-                                    </form>
+                                    {%if not comment['removed'] %}
+                                        <form method="POST" action="/post-comment">
+                                            <input type="hidden" name="articleNum" value="1">
+                                            <input type="hidden" name="root" value="{{ comment['_id'] }}">
+                                            <input type="text" name="comment" placeholder="reply."></input>
+                                            <button type="submit">Reply</button>
+                                        </form>
+                                    {% endif %}
                                 </div>
                             {% endif %}
                         {% else %}
@@ -259,20 +269,42 @@
                         {% for comment in comments['4'] %}
                             {% if not comment['root'] %}
                                 <div class="comment">
-                                    <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% if comment['removed'] %}
+                                        {{ comment['comment'] }}
+                                    {% else %}
+                                        <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% endif %}
+                                    {% if not comment['removed'] and user and user['name'] == 'moderator' %}
+                                        <form method="POST" action="{{ url_for('delete', id=comment['_id']) }}">
+                                            <input type="submit" value="Delete Comment "
+                                                onclick="return confirm('Are you sure??')">
+                                        </form>
+                                    {% endif %}
                                     {% for reply in comments['4'] %}
                                         {% if reply['root'] == comment['_id'] %}
                                             <div class="reply">
-                                                <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                                {% if reply['removed'] %}
+                                                    {{ reply['comment'] }}
+                                                {% else %}
+                                                    <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                                    {% if user and user['name'] == 'moderator' %}
+                                                        <form method="POST" action="{{ url_for('delete', id=reply['_id']) }}">
+                                                            <input type="submit" value="Delete Reply "
+                                                                onclick="return confirm('Are you sure??')">
+                                                        </form>
+                                                    {% endif %}
+                                                {% endif %}
                                             </div>
                                         {% endif %}
                                     {% endfor %}
-                                    <form method="POST" action="/post-comment">
-                                        <input type="hidden" name="articleNum" value="4">
-                                        <input type="hidden" name="root" value="{{ comment['_id'] }}">
-                                        <input type="text" name="comment" placeholder="reply."></input>
-                                        <button type="submit">Reply</button>
-                                    </form>
+                                    {%if not comment['removed'] %}
+                                        <form method="POST" action="/post-comment">
+                                            <input type="hidden" name="articleNum" value="1">
+                                            <input type="hidden" name="root" value="{{ comment['_id'] }}">
+                                            <input type="text" name="comment" placeholder="reply."></input>
+                                            <button type="submit">Reply</button>
+                                        </form>
+                                    {% endif %}
                                 </div>
                             {% endif %}
                         {% else %}
@@ -332,20 +364,42 @@
                         {% for comment in comments['2'] %}
                             {% if not comment['root'] %}
                                 <div class="comment">
-                                    <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% if comment['removed'] %}
+                                        {{ comment['comment'] }}
+                                    {% else %}
+                                        <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% endif %}
+                                    {% if not comment['removed'] and user and user['name'] == 'moderator' %}
+                                        <form method="POST" action="{{ url_for('delete', id=comment['_id']) }}">
+                                            <input type="submit" value="Delete Comment "
+                                                onclick="return confirm('Are you sure??')">
+                                        </form>
+                                    {% endif %}
                                     {% for reply in comments['2'] %}
                                         {% if reply['root'] == comment['_id'] %}
                                             <div class="reply">
-                                                <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                                {% if reply['removed'] %}
+                                                    {{ reply['comment'] }}
+                                                {% else %}
+                                                    <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                                    {% if user and user['name'] == 'moderator' %}
+                                                        <form method="POST" action="{{ url_for('delete', id=reply['_id']) }}">
+                                                            <input type="submit" value="Delete Reply "
+                                                                onclick="return confirm('Are you sure??')">
+                                                        </form>
+                                                    {% endif %}
+                                                {% endif %}
                                             </div>
                                         {% endif %}
                                     {% endfor %}
-                                    <form method="POST" action="/post-comment">
-                                        <input type="hidden" name="articleNum" value="2">
-                                        <input type="hidden" name="root" value="{{ comment['_id'] }}">
-                                        <input type="text" name="comment" placeholder="reply."></input>
-                                        <button type="submit">Reply</button>
-                                    </form>
+                                    {%if not comment['removed'] %}
+                                        <form method="POST" action="/post-comment">
+                                            <input type="hidden" name="articleNum" value="1">
+                                            <input type="hidden" name="root" value="{{ comment['_id'] }}">
+                                            <input type="text" name="comment" placeholder="reply."></input>
+                                            <button type="submit">Reply</button>
+                                        </form>
+                                    {% endif %}
                                 </div>
                             {% endif %}
                         {% else %}
@@ -402,20 +456,42 @@
                         {% for comment in comments['5'] %}
                             {% if not comment['root'] %}
                                 <div class="comment">
-                                    <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% if comment['removed'] %}
+                                        {{ comment['comment'] }}
+                                    {% else %}
+                                        <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% endif %}
+                                    {% if not comment['removed'] and user and user['name'] == 'moderator' %}
+                                        <form method="POST" action="{{ url_for('delete', id=comment['_id']) }}">
+                                            <input type="submit" value="Delete Comment "
+                                                onclick="return confirm('Are you sure??')">
+                                        </form>
+                                    {% endif %}
                                     {% for reply in comments['5'] %}
                                         {% if reply['root'] == comment['_id'] %}
                                             <div class="reply">
-                                                <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                                {% if reply['removed'] %}
+                                                    {{ reply['comment'] }}
+                                                {% else %}
+                                                    <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                                    {% if user and user['name'] == 'moderator' %}
+                                                        <form method="POST" action="{{ url_for('delete', id=reply['_id']) }}">
+                                                            <input type="submit" value="Delete Reply "
+                                                                onclick="return confirm('Are you sure??')">
+                                                        </form>
+                                                    {% endif %}
+                                                {% endif %}
                                             </div>
                                         {% endif %}
                                     {% endfor %}
-                                    <form method="POST" action="/post-comment">
-                                        <input type="hidden" name="articleNum" value="5">
-                                        <input type="hidden" name="root" value="{{ comment['_id'] }}">
-                                        <input type="text" name="comment" placeholder="reply."></input>
-                                        <button type="submit">Reply</button>
-                                    </form>
+                                    {%if not comment['removed'] %}
+                                        <form method="POST" action="/post-comment">
+                                            <input type="hidden" name="articleNum" value="1">
+                                            <input type="hidden" name="root" value="{{ comment['_id'] }}">
+                                            <input type="text" name="comment" placeholder="reply."></input>
+                                            <button type="submit">Reply</button>
+                                        </form>
+                                    {% endif %}
                                 </div>
                             {% endif %}
                         {% else %}
@@ -474,20 +550,42 @@
                         {% for comment in comments['3'] %}
                             {% if not comment['root'] %}
                                 <div class="comment">
-                                    <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% if comment['removed'] %}
+                                        {{ comment['comment'] }}
+                                    {% else %}
+                                        <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% endif %}
+                                    {% if not comment['removed'] and user and user['name'] == 'moderator' %}
+                                        <form method="POST" action="{{ url_for('delete', id=comment['_id']) }}">
+                                            <input type="submit" value="Delete Comment "
+                                                onclick="return confirm('Are you sure??')">
+                                        </form>
+                                    {% endif %}
                                     {% for reply in comments['3'] %}
                                         {% if reply['root'] == comment['_id'] %}
                                             <div class="reply">
-                                                <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                                {% if reply['removed'] %}
+                                                    {{ reply['comment'] }}
+                                                {% else %}
+                                                    <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                                    {% if user and user['name'] == 'moderator' %}
+                                                        <form method="POST" action="{{ url_for('delete', id=reply['_id']) }}">
+                                                            <input type="submit" value="Delete Reply "
+                                                                onclick="return confirm('Are you sure??')">
+                                                        </form>
+                                                    {% endif %}
+                                                {% endif %}
                                             </div>
                                         {% endif %}
                                     {% endfor %}
-                                    <form method="POST" action="/post-comment">
-                                        <input type="hidden" name="articleNum" value="3">
-                                        <input type="hidden" name="root" value="{{ comment['_id'] }}">
-                                        <input type="text" name="comment" placeholder="reply."></input>
-                                        <button type="submit">Reply</button>
-                                    </form>
+                                    {%if not comment['removed'] %}
+                                        <form method="POST" action="/post-comment">
+                                            <input type="hidden" name="articleNum" value="1">
+                                            <input type="hidden" name="root" value="{{ comment['_id'] }}">
+                                            <input type="text" name="comment" placeholder="reply."></input>
+                                            <button type="submit">Reply</button>
+                                        </form>
+                                    {% endif %}
                                 </div>
                             {% endif %}
                         {% else %}
@@ -544,20 +642,42 @@
                         {% for comment in comments['6'] %}
                             {% if not comment['root'] %}
                                 <div class="comment">
-                                    <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% if comment['removed'] %}
+                                        {{ comment['comment'] }}
+                                    {% else %}
+                                        <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% endif %}
+                                    {% if not comment['removed'] and user and user['name'] == 'moderator' %}
+                                        <form method="POST" action="{{ url_for('delete', id=comment['_id']) }}">
+                                            <input type="submit" value="Delete Comment "
+                                                onclick="return confirm('Are you sure??')">
+                                        </form>
+                                    {% endif %}
                                     {% for reply in comments['6'] %}
                                         {% if reply['root'] == comment['_id'] %}
                                             <div class="reply">
-                                                <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                                {% if reply['removed'] %}
+                                                    {{ reply['comment'] }}
+                                                {% else %}
+                                                    <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                                    {% if user and user['name'] == 'moderator' %}
+                                                        <form method="POST" action="{{ url_for('delete', id=reply['_id']) }}">
+                                                            <input type="submit" value="Delete Reply "
+                                                                onclick="return confirm('Are you sure??')">
+                                                        </form>
+                                                    {% endif %}
+                                                {% endif %}
                                             </div>
                                         {% endif %}
                                     {% endfor %}
-                                    <form method="POST" action="/post-comment">
-                                        <input type="hidden" name="articleNum" value="6">
-                                        <input type="hidden" name="root" value="{{ comment['_id'] }}">
-                                        <input type="text" name="comment" placeholder="reply."></input>
-                                        <button type="submit">Reply</button>
-                                    </form>
+                                    {%if not comment['removed'] %}
+                                        <form method="POST" action="/post-comment">
+                                            <input type="hidden" name="articleNum" value="1">
+                                            <input type="hidden" name="root" value="{{ comment['_id'] }}">
+                                            <input type="text" name="comment" placeholder="reply."></input>
+                                            <button type="submit">Reply</button>
+                                        </form>
+                                    {% endif %}
                                 </div>
                             {% endif %}
                         {% else %}
