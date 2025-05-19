@@ -192,8 +192,6 @@
                         {% endfor %}
                     </div>
 
-
-
                     <!-- essentially repeat the process for the next article from the api search
                         which will be placed under the previous one 
                         this is for the fourth article that appears from the search -->
@@ -238,6 +236,38 @@
                         source is defined in the fetch call by extracting the url of the article image-->
                     <img id="quatroImage" src="static/assets/BLTpic.jpeg" alt="Article 4 image" title="pic">
 
+                    <form method="POST" action="/post-comment">
+                        <input type="hidden" name="articleNum" value="4">
+                        <input type="text" name="comment" placeholder="Share your thoughts"></input>
+                        <button type="submit">Submit Comment</button>
+                    </form>
+
+                    <h3>Comments</h3>
+                    <div id="commentsSection">
+                        {% for comment in comments['4'] %}
+                            {% if not comment['root'] %}
+                                <div class="comment">
+                                    <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% for reply in comments['4'] %}
+                                        {% if reply['root'] == comment['_id'] %}
+                                            <div class="reply">
+                                                <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <form method="POST" action="/post-comment">
+                                        <input type="hidden" name="articleNum" value="4">
+                                        <input type="hidden" name="root" value="{{ comment['_id'] }}">
+                                        <input type="text" name="comment" placeholder="reply."></input>
+                                        <button type="submit">Reply</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <p>No comments yet.</p>
+                        {% endfor %}
+                    </div>
+
                 </div>
                 <!-- repeat process for columns 2 and three-->
                 <div id="column2">
@@ -278,6 +308,38 @@
                     <!-- inserts article 2 image 
                         source is defined in the fetch call by extracting the url of the article image-->
                     <img id="dosImage" src="static/assets/cubanSandwichPic.jpg" alt="Article 2 image" title="pic">
+
+                    <form method="POST" action="/post-comment">
+                        <input type="hidden" name="articleNum" value="2">
+                        <input type="text" name="comment" placeholder="Share your thoughts"></input>
+                        <button type="submit">Submit Comment</button>
+                    </form>
+
+                    <h3>Comments</h3>
+                    <div id="commentsSection">
+                        {% for comment in comments['2'] %}
+                            {% if not comment['root'] %}
+                                <div class="comment">
+                                    <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% for reply in comments['2'] %}
+                                        {% if reply['root'] == comment['_id'] %}
+                                            <div class="reply">
+                                                <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <form method="POST" action="/post-comment">
+                                        <input type="hidden" name="articleNum" value="2">
+                                        <input type="hidden" name="root" value="{{ comment['_id'] }}">
+                                        <input type="text" name="comment" placeholder="reply."></input>
+                                        <button type="submit">Reply</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <p>No comments yet.</p>
+                        {% endfor %}
+                    </div>
                     
                     <!--
                         Image source: Striped Spatula, Made by User: Amanda Biddle
@@ -316,6 +378,38 @@
                             console.error('Error fetching data:', error);
                         });
                     </script>
+
+                    <form method="POST" action="/post-comment">
+                        <input type="hidden" name="articleNum" value="5">
+                        <input type="text" name="comment" placeholder="Share your thoughts"></input>
+                        <button type="submit">Submit Comment</button>
+                    </form>
+
+                    <h3>Comments</h3>
+                    <div id="commentsSection">
+                        {% for comment in comments['5'] %}
+                            {% if not comment['root'] %}
+                                <div class="comment">
+                                    <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% for reply in comments['5'] %}
+                                        {% if reply['root'] == comment['_id'] %}
+                                            <div class="reply">
+                                                <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <form method="POST" action="/post-comment">
+                                        <input type="hidden" name="articleNum" value="5">
+                                        <input type="hidden" name="root" value="{{ comment['_id'] }}">
+                                        <input type="text" name="comment" placeholder="reply."></input>
+                                        <button type="submit">Reply</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <p>No comments yet.</p>
+                        {% endfor %}
+                    </div>
 
                 </div>
                 <div id="column3">
@@ -357,6 +451,38 @@
                         });
                     </script>
 
+                    <form method="POST" action="/post-comment">
+                        <input type="hidden" name="articleNum" value="3">
+                        <input type="text" name="comment" placeholder="Share your thoughts"></input>
+                        <button type="submit">Submit Comment</button>
+                    </form>
+
+                    <h3>Comments</h3>
+                    <div id="commentsSection">
+                        {% for comment in comments['3'] %}
+                            {% if not comment['root'] %}
+                                <div class="comment">
+                                    <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% for reply in comments['3'] %}
+                                        {% if reply['root'] == comment['_id'] %}
+                                            <div class="reply">
+                                                <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <form method="POST" action="/post-comment">
+                                        <input type="hidden" name="articleNum" value="3">
+                                        <input type="hidden" name="root" value="{{ comment['_id'] }}">
+                                        <input type="text" name="comment" placeholder="reply."></input>
+                                        <button type="submit">Reply</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <p>No comments yet.</p>
+                        {% endfor %}
+                    </div>
+
                     <div id="seis"><strong id="seisTitle">...Loading...</strong></div>
 
                     <div id="seisText">...Loading...</div>
@@ -394,6 +520,39 @@
                     <!-- inserts article 6 image 
                         source is defined in the fetch call by extracting the url of the article image-->
                     <img id="seisImage" src="static/assets/banhMiPic.jpg" alt="Article 6 image" title="pic">
+
+                    <form method="POST" action="/post-comment">
+                        <input type="hidden" name="articleNum" value="6">
+                        <input type="text" name="comment" placeholder="Share your thoughts"></input>
+                        <button type="submit">Submit Comment</button>
+                    </form>
+
+                    <h3>Comments</h3>
+                    <div id="commentsSection">
+                        {% for comment in comments['6'] %}
+                            {% if not comment['root'] %}
+                                <div class="comment">
+                                    <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% for reply in comments['6'] %}
+                                        {% if reply['root'] == comment['_id'] %}
+                                            <div class="reply">
+                                                <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <form method="POST" action="/post-comment">
+                                        <input type="hidden" name="articleNum" value="6">
+                                        <input type="hidden" name="root" value="{{ comment['_id'] }}">
+                                        <input type="text" name="comment" placeholder="reply."></input>
+                                        <button type="submit">Reply</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <p>No comments yet.</p>
+                        {% endfor %}
+                    </div>
+
                 </div>
             </div>
         </main>
