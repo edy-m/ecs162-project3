@@ -1,0 +1,407 @@
+<!--
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <title>The New York Times</title>
+        <link rel="stylesheet" href="../static/style.css">
+    </head>
+    <script src="../static/main.js"></script>
+    <body>
+        {% if user %}
+            <h2>Logged in as {{ user['email'] }}</h2>
+            <a href="/logout">Logout</a>
+        {% else %}
+            <a href="/login">Login with Dex</a>
+        {% endif %}
+    </body>
+
+    <footer>
+    </footer>
+-->
+<!DOCTYPE html>
+<html lang="ca">
+    <!--
+        lecture 2 and 3 slides from class - syntax, formatting, and general structure for implementing html
+        and css functionality
+        (https://docs.google.com/presentation/d/e/2PACX-1vTG2mKIEEt7XfsP2XXNA1sD0Wgfyo1oX4fYFq62qWs1ZgmxS0LRIx6gomeEBpVTLG6EDytbMdwyXpHu/pub?start=false&loop=false&delayms=3000&slide=id.g94d7922f30_0_70)
+        (https://docs.google.com/presentation/d/e/2PACX-1vR8fpanvQrI3JnGPNx8Je1xK8vUYkdLTJa6RsL_oOPQN7zXyllZn6ddanvaf65QxwcpoYIKvU8HKcSs/pub?start=false&loop=false&delayms=3000&slide=id.g3470a501663_0_116)
+        -->
+    <head>
+        <meta charset="UTF-8">
+        <!-- link css and html-->
+        <link rel="stylesheet" href="/static/style.css">
+        <!--
+            w3schools - for help implementing meta tag that allows for viewport control,
+            single column implementation for small screens wouldn't work without this
+            (https://www.w3schools.com/css/css_rwd_viewport.asp)
+            -->
+        <!-- Allow for device scaling-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Edy's NY Times Page</title>
+    </head>
+    <body>
+        <header>
+            <!-- header (h1) includes ny times label, date/time, nav bar-->
+            <div id="h1">
+                <div id="date"></div>
+                <!--
+                    SheCodes - for syntax and js functions needed to implement the current date/time 
+                    using a js script
+                    (https://www.shecodes.io/athena/72750-how-to-inject-current-day-and-time-into-html)
+                    -->
+                <!-- js script that updates date/time to current-->
+                <script>
+                    //create date/time variable
+                    var now = new Date();
+                    var date = now.toLocaleString();
+                    //write onto page
+                    document.getElementById("date").innerHTML = date;
+                  </script>
+                <div id="title">The New York Times</div>
+                <!-- unused third flex box, keeps title centered-->
+                <div id="blank"></div>
+            </div>
+            <!--
+                w3schools - for syntax and strategy for implementing nav section within a header
+                (https://www.w3schools.com/css/css_navbar.asp)
+                -->
+            <!-- nav bar under page title, includes contents of page-->
+            <nav>
+                <div>Top Stories</div>
+                <div>Local</div>
+                <div>Sacramento/Davis</div>
+                
+                {% if user %}
+                    <h7>Logged in as {{ user['email'] }}</h7>
+                    <a href="/logout">Logout</a>
+                {% else %}
+                    <a href="/login">Login with Dex</a>
+                {% endif %}
+            
+            </nav>
+            <!-- placeholder for css to create a second border under the navbar-->
+            <div id="doubleBorder"></div>
+        </header>
+        <main>
+            <!-- main (h2) contains content like pictures, titles, paragraphs and borders to
+             mimic the ny times front page -->
+            <div id="h2">
+                <!-- three different columns, each containing 2 articles -->
+                <div id="column1">
+                    <!-- 
+                        Temporary image is used essentially as placeholder for "src" so we can define the url later
+                        Temporary images will be the ones used for the project 1 version
+                        Image source: allrecipes, Made by User: Dotdash Meredith Food Studios
+                        (https://www.google.com/search?sca_esv=bf566d55456b5970&sxsrf=AHTn8zqyCuOjoFKGfT0EogDp8pVQpqZAlw:1744867964059&q=grilled+cheese+sandwich&udm=2&fbs=ABzOT_CWdhQLP1FcmU5B0fn3xuWpA-dk4wpBWOGsoR7DG5zJBkzPWUS0OtApxR2914vrjk60CMaA0jPMd-1UByCaBk9RkR5TYqOiT6ScESjovcjoQsynwGio9lQeNPvKtMADsdHOgKXTsBgA91tNeKNFjSbE_brW7IW51QgwD7Imts9JUAWN_Y4Q-A9iZeiZpQO8aLY-LpT5IXC_ZHkuUV9st118FKahrw&sa=X&ved=2ahUKEwi22rXZq96MAxUVDDQIHeJLFZQQtKgLegQIDxAB&biw=1278&bih=1312&dpr=1#vhid=m6eG6urzCVr_5M&vssid=mosaic)
+                        -->
+
+                    <!-- 
+                        Image source: New York Times search using filter: "sacramento"
+                        Thumbnail picture used for first article from search results
+                        -->
+                    <!-- inserts article 1 image 
+                        source is defined in the fetch call by extracting the url of the article image-->
+                    <img id="unoImage" src="static/assets/grilledCheesePic.jpg" alt="Article 1 image" title="pic">
+                    <!-- Title of first article from search
+                        will show "...loading..." as information is in the process of being fetched -->
+                    <div id="uno"><strong id="unoTitle">...Loading...</strong></div>
+
+                    <div id="unoText">...Loading...</div>
+                    <!--
+                        week 4 discussion slides and lectures 9 & 10 slides from class - 
+                        help using nyt search api and setup/structure/usage for fetch function
+                        (https://canvas.ucdavis.edu/courses/993295/files/folder/Lab%20Materials/week%204?preview=27512103)
+                        (https://docs.google.com/presentation/d/1PROc0HjCUyOMOEiZUcKLrqo-FQO9kvez4cb09ElfSFM/edit#slide=id.g34f3b6bcb4f_0_35)
+                        (https://docs.google.com/presentation/d/1-JOfz_l8b8m_cMky4AM6cct6PX_VM0zVOKws3qqLA9Y/edit#slide=id.gd6b56daeb7_0_131)
+                        -->
+
+                    <!--
+                        nytimes developers - for help writing nyt search api queries using filters
+                        also help identifying keywords used for parsing article data such as snippet,
+                        multimedia, default, url, headline, main, etc.
+                        (https://developer.nytimes.com/docs/articlesearch-product/1/overview)
+                        (https://developer.nytimes.com/docs/articlesearch-product/1/types/Article)
+                        -->
+
+                    <!-- js script that fetches info from the nyt using their search api,
+                        nested fetch call the first one extracts apiKey so it isnt exposed then appends to form full url
+                        the nyt search api uses the "sacramento" filter to get local stories
+                        also uses our given api search key 
+                        fetches search data, parses data to extract first article (data.response.docs[0]),
+                        extract leading image from said article (article1.multimedia), 
+                        set that image url as image src (img1.src = multimedia1.default.url),
+                        extract article title (article1.headline.main) and description (article1.snippet) to be displayed onto page
+                        catch error if we weren't able to fetch any data -->
+                    <script>
+                        fetch('/api/key')
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('KEY from /api/key:', data.apiKey);
+                                const keyy = data.apiKey;
+                                url1 = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=sacramento&api-key=' + keyy;
+                                fetch(url1)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const article1 = data.response.docs[0];
+                                    const multimedia1 = article1.multimedia;
+                                    const img1 = document.getElementById('unoImage');
+                                    img1.src = multimedia1.default.url;
+                                    const title1 = article1.headline.main;
+                                    const snippet1 = article1.snippet;
+                                    document.getElementById('unoTitle').textContent = title1;
+                                    document.getElementById('unoText').textContent = snippet1;
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching data:', error);
+                                });
+                            })
+                        .catch(error => {
+                            console.error('Error fetching data:', error);
+                        });
+                    </script>
+
+                    <form method="POST" action="/post-comment">
+                        <input type="hidden" name="articleNum" value="1">
+                        <input type="text" name="comment" placeholder="Share your thoughts"></input>
+                        <button type="submit">Submit Comment</button>
+                    </form>
+
+                    <h3>Comments</h3>
+                    <div id="commentsSection">
+                        {% for comment in comments['1'] %}
+                            {% if not comment['root'] %}
+                                <div class="comment">
+                                    <strong>{{ comment['user_name'] }}</strong>: {{ comment['comment'] }}
+                                    {% for reply in comments['1'] %}
+                                        {% if reply['root'] == comment['_id'] %}
+                                            <div class="reply">
+                                                <strong>{{ reply['user_name'] }}</strong>: {{ reply['comment'] }}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                    <form method="POST" action="/post-comment">
+                                        <input type="hidden" name="articleNum" value="1">
+                                        <input type="hidden" name="root" value="{{ comment['_id'] }}">
+                                        <input type="text" name="comment" placeholder="reply."></input>
+                                        <button type="submit">Reply</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            <p>No comments yet.</p>
+                        {% endfor %}
+                    </div>
+
+
+
+                    <!-- essentially repeat the process for the next article from the api search
+                        which will be placed under the previous one 
+                        this is for the fourth article that appears from the search -->
+
+                    <!-- Title of first article from search
+                        will show "...loading..." as information is in the process of being fetched -->
+                    <div id="quatro"><strong id="quatroTitle">...Loading...</strong></div>
+
+                    <div id="quatroText">...Loading...</div>
+                    <script>
+                        fetch('/api/key')
+                        .then(response => response.json())
+                        .then(data => {
+                            const keyy = data.apiKey;
+                            url4 = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=sacramento&api-key=' + keyy;
+                            fetch(url4)
+                            .then(response => response.json())
+                            .then(data => {
+                                const article4 = data.response.docs[3];
+                                const multimedia4 = article4.multimedia;
+                                const img4 = document.getElementById('quatroImage');
+                                img4.src = multimedia4.default.url;
+                                const title4 = article4.headline.main;
+                                const snippet4 = article4.snippet;
+                                document.getElementById('quatroTitle').textContent = title4;
+                                document.getElementById('quatroText').textContent = snippet4;
+                            })
+                            .catch(error => {
+                                console.error('Error fetching data:', error);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching data:', error);
+                        });
+                    </script>
+                    <!--
+                        Image source: Reily Products, Made by User: N/A
+                        (https://www.google.com/search?q=BLT&sca_esv=eca5bc19763b5d0c&udm=2&biw=1278&bih=1312&sxsrf=AHTn8zrHqOUOgcd7EaS-UKFyR0Tb8XGh8Q%3A1744773494858&ei=diH_Z5SANI2F0PEPk_6BuQg&ved=0ahUKEwiUk__iy9uMAxWNAjQIHRN_IIcQ4dUDCBE&uact=5&oq=BLT&gs_lp=EgNpbWciA0JMVDIKEAAYgAQYQxiKBTINEAAYgAQYsQMYQxiKBTINEAAYgAQYsQMYQxiKBTIIEAAYgAQYsQMyCBAAGIAEGLEDMgUQABiABDIIEAAYgAQYsQMyCBAAGIAEGLEDMgUQABiABDIFEAAYgARIlxpQlApYghFwAXgAkAEAmAFCoAG7AaoBATO4AQPIAQD4AQGYAgSgAssBqAIKwgIKECMYJxjJAhjqAsICBxAjGCcYyQLCAgsQABiABBixAxiDAZgDBJIHATSgB6oSsgcBM7gHxwE&sclient=img#vhid=WlfGPTodhJAj5M&vssid=mosaic)
+                        -->
+
+                    <!-- inserts article 4 image 
+                        source is defined in the fetch call by extracting the url of the article image-->
+                    <img id="quatroImage" src="static/assets/BLTpic.jpeg" alt="Article 4 image" title="pic">
+
+                </div>
+                <!-- repeat process for columns 2 and three-->
+                <div id="column2">
+                    <div id="dos"><strong id="dosTitle">...Loading...</strong></div>
+
+                    <div id="dosText">...Loading...</div>
+                    <script>
+                        fetch('/api/key')
+                        .then(response => response.json())
+                        .then(data => {
+                            const keyy = data.apiKey;
+                            url2 = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=sacramento&api-key=' + keyy;
+                            fetch(url2)
+                            .then(response => response.json())
+                            .then(data => {
+                                const article2 = data.response.docs[1];
+                                const multimedia2 = article2.multimedia;
+                                const img2 = document.getElementById('dosImage');
+                                img2.src = multimedia2.default.url;
+                                const title2 = article2.headline.main;
+                                const snippet2 = article2.snippet;
+                                document.getElementById('dosTitle').textContent = title2;
+                                document.getElementById('dosText').textContent = snippet2;
+                            })
+                            .catch(error => {
+                                console.error('Error fetching data:', error);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching data:', error);
+                        });
+                    </script>
+                    <!--
+                        Image source: Food and Wine, Made by User: Matt Taylor-Gross
+                        (https://www.google.com/search?sca_esv=bf566d55456b5970&sxsrf=AHTn8zo-XII1BiJ2w8aWgIk0_cEk6tlng:1744868735430&q=cuban+sandwich&udm=2&fbs=ABzOT_CWdhQLP1FcmU5B0fn3xuWpA-dk4wpBWOGsoR7DG5zJBsxayPSIAqObp_AgjkUGqengxVrJ7hrmYmz7X2OZp_NI3BkJIkjQUIfCSVUgD1ZXcYNwY5TEUycvG7sZ_FtLINyZtEYir0QpLsZE8Ew8mr0bMt3tNLEFCTRs8WekazCnQTUYyCDd4wRx9CQdyMaUtnZs5vqh6LqbjNoawPUH7XrJm2vpAg&sa=X&ved=2ahUKEwiW9Z3Jrt6MAxVdNzQIHUTtDYwQtKgLegQIHRAB&biw=1278&bih=612&dpr=1#vhid=BK8F1_dUxL4zkM&vssid=mosaic)
+                        -->
+
+                    <!-- inserts article 2 image 
+                        source is defined in the fetch call by extracting the url of the article image-->
+                    <img id="dosImage" src="static/assets/cubanSandwichPic.jpg" alt="Article 2 image" title="pic">
+                    
+                    <!--
+                        Image source: Striped Spatula, Made by User: Amanda Biddle
+                        (https://www.google.com/search?q=reuben+sandwich&sca_esv=d4547c19e529b35e&udm=2&biw=1278&bih=1312&sxsrf=AHTn8zoyP53m1_g_n-DGnQIDEiIO4vZzCA%3A1744851385430&ei=uVEAaMf2Gce20PEP8faXoQs&oq=reuben&gs_lp=EgNpbWciBnJldWJlbioCCAAyDRAAGIAEGLEDGEMYigUyCBAAGIAEGLEDMgoQABiABBhDGIoFMgoQABiABBhDGIoFMggQABiABBixAzIKEAAYgAQYQxiKBTIKEAAYgAQYQxiKBTIFEAAYgAQyChAAGIAEGEMYigUyBRAAGIAESOsmUP0GWMYNcAF4AJABAJgBRKAB-wKqAQE2uAEByAEA-AEBmAIHoAKgA6gCCsICChAjGCcYyQIY6gLCAgcQIxgnGMkCwgILEAAYgAQYsQMYgwHCAg4QABiABBixAxiDARiKBZgDA5IHATegB-0msgcBNrgHnQM&sclient=img#vhid=AnxidUQ2FWEwXM&vssid=mosaic)
+                        -->
+                    
+                    <!-- inserts article 5 image 
+                        source is defined in the fetch call by extracting the url of the article image-->
+                    <img id="cincoImage" src="static/assets/reubenSandwichPic.jpg" alt="Article 5 image" title="pic 5">
+                    <div id="cinco"><strong id="cincoTitle">...Loading...</strong></div>
+    
+                    <div id="cincoText">...Loading...</div>
+                    <script>
+                        fetch('/api/key')
+                        .then(response => response.json())
+                        .then(data => {
+                            const keyy = data.apiKey;
+                            url5 = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=sacramento&api-key=' + keyy;
+                            fetch(url5)
+                            .then(response => response.json())
+                            .then(data => {
+                                const article5 = data.response.docs[4];
+                                const multimedia5 = article5.multimedia;
+                                const img5 = document.getElementById('cincoImage');
+                                img5.src = multimedia5.default.url;
+                                const title5 = article5.headline.main;
+                                const snippet5 = article5.snippet;
+                                document.getElementById('cincoTitle').textContent = title5;
+                                document.getElementById('cincoText').textContent = snippet5;
+                            })
+                            .catch(error => {
+                                console.error('Error fetching data:', error);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching data:', error);
+                        });
+                    </script>
+
+                </div>
+                <div id="column3">
+                    <!--
+                        Image source: ChainBaker, Made by User: N/A
+                        (https://www.google.com/search?sca_esv=bf566d55456b5970&sxsrf=AHTn8zrDaLO14fRzXHnfptXKliQaprwGAQ:1744869075234&q=meatball+sub&udm=2&fbs=ABzOT_CWdhQLP1FcmU5B0fn3xuWpA-dk4wpBWOGsoR7DG5zJBsxayPSIAqObp_AgjkUGqengxVrJ7hrmYmz7X2OZp_NIYfhIAjPnSJLO3GH6L0gKvsMx863yWAECACzcq28K_xbJJoPcSEvdLSYBoilrVRznyvhgudvug19AweeEbrCGkt1-WOOEb9EGKHZMjwGgxB85lVM932Nv9pb4lgel1ps0RGcIKA&sa=X&ved=2ahUKEwi3uKLrr96MAxX8weYEHdQgKWMQtKgLegQIDhAB&biw=1278&bih=612&dpr=1#vhid=bX8BIM9xfNTe-M&vssid=mosaic)
+                        -->
+
+                    <!-- inserts article 3 image 
+                        source is defined in the fetch call by extracting the url of the article image-->
+                    <img id="tresImage" src="static/assets/meatballSubPic.jpg" alt="Article 3 image" title="pic 3">
+                    <div id="tres"><strong id="tresTitle">...Loading...</strong></div>
+
+                    <div id="tresText">...Loading...</div>
+                    <script>
+                        fetch('/api/key')
+                        .then(response => response.json())
+                        .then(data => {
+                            const keyy = data.apiKey;
+                            url3 = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=sacramento&api-key=' + keyy;
+                            fetch(url3)
+                            .then(response => response.json())
+                            .then(data => {
+                                const article3 = data.response.docs[2];
+                                const multimedia3 = article3.multimedia;
+                                const img3 = document.getElementById('tresImage');
+                                img3.src = multimedia3.default.url;
+                                const title3 = article3.headline.main;
+                                const snippet3 = article3.snippet;
+                                document.getElementById('tresTitle').textContent = title3;
+                                document.getElementById('tresText').textContent = snippet3;
+                            })
+                            .catch(error => {
+                                console.error('Error fetching data:', error);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching data:', error);
+                        });
+                    </script>
+
+                    <div id="seis"><strong id="seisTitle">...Loading...</strong></div>
+
+                    <div id="seisText">...Loading...</div>
+                    <script>
+                        fetch('/api/key')
+                        .then(response => response.json())
+                        .then(data => {
+                            const keyy = data.apiKey;
+                            url6 = 'https://api.nytimes.com/svc/search/v2/articlesearch.json?q=sacramento&api-key=' + keyy;
+                            fetch(url6)
+                            .then(response => response.json())
+                            .then(data => {
+                                const article6 = data.response.docs[5];
+                                const multimedia6 = article6.multimedia;
+                                const img6 = document.getElementById('seisImage');
+                                img6.src = multimedia6.default.url;
+                                const title6 = article6.headline.main;
+                                const snippet6 = article6.snippet;
+                                document.getElementById('seisTitle').textContent = title6;
+                                document.getElementById('seisText').textContent = snippet6;
+                            })
+                            .catch(error => {
+                                console.error('Error fetching data:', error);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error fetching data:', error);
+                        });
+                    </script>
+                    <!--
+                        Image source: Pinterest, Made by User: RecipeTin Eats
+                        (https://www.pinterest.com/pin/420031102763746202/)
+                        -->
+
+                    <!-- inserts article 6 image 
+                        source is defined in the fetch call by extracting the url of the article image-->
+                    <img id="seisImage" src="static/assets/banhMiPic.jpg" alt="Article 6 image" title="pic">
+                </div>
+            </div>
+        </main>
+        <footer>
+            <!-- footer simply contains three flex boxes to mimic the actual ny times footer links-->
+            <div>Contact</div>
+            <div>Help</div>
+            <div>Terms of Service</div>
+        </footer>
+    </body>
+</html>

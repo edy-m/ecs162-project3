@@ -1,0 +1,48 @@
+services:
+  app:
+    image: python:3.10-slim
+    working_dir: /app
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+      - .env.dev
+    ports:
+      - "${PORT:-8000}:8000"
+    depends_on:
+      - mongo
+      - dex
+    command: >
+      sh -c "pip install --no-cache-dir -r requirements.txt &&
+             python -m flask run --host=0.0.0.0 --port=$PORT --reload --debug"
+    environment:
+      FLASK_APP: app.py
+      FLASK_ENV: development
+
+  mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    env_file:
+      - .env
+      - .env.dev
+    volumes:
+      - mongo_data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+
+  dex:
+    build:
+      context: .
+      dockerfile: Dockerfile.dex
+    volumes:
+      - ./config/dex:/etc/dex
+    ports:
+      - "5556:5556"
+    env_file:
+      - .env
+      - .env.dev
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["envsubst < /etc/dex/dex.yaml > /etc/dex/dex_final.yaml && dex serve /etc/dex/dex_final.yaml"]
+
+volumes:
+  mongo_data:

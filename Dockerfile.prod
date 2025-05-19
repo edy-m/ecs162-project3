@@ -1,0 +1,16 @@
+# Stage 1: Build Flask App
+FROM python:3.10-slim
+
+WORKDIR /app
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy Flask application files
+COPY app.py .
+COPY static/ ./static/
+COPY templates/ ./templates/
+
+# Run the Flask app
+CMD ["python", "app.py"]

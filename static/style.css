@@ -1,0 +1,235 @@
+/* Reference
+    fontspace - source of downloaded 'Chomsky-8MOa2' font to mimic ny times title
+    (https://www.fontspace.com/category/new-york-times) */
+
+/* downloaded and imported font in the form of an otf file online to mimic the ny times title font*/
+@font-face {
+    font-family: 'Chomsky-8MOa2';
+    src: url('/static/assets/Chomsky-8MOa2.otf') format('opentype');
+}
+
+/* Reference
+    w3schools - syntax help implementing borders of different styles
+    (https://www.w3schools.com/css/css_border.asp) */
+
+/* Reference
+    w3schools - syntax and strategy for adjusting border thickness
+    (https://www.w3schools.com/cssref/pr_border-width.php) */
+
+/* Reference
+    w3schools - syntax and strategy for padding left right top and bottom edges
+    (https://www.w3schools.com/css/css_padding.asp) */
+
+/* Reference
+    css-tricks - syntax and strategies for implementing flexbox functionality within css
+    (https://css-tricks.com/snippets/css/a-guide-to-flexbox/#aa-background) */
+
+/* header formatting including flex box formatting into rows with spacing between*/
+#h1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid black;
+    border-width: thin;
+    margin-bottom: 3px;
+    padding-bottom: 10px;
+}
+
+#date {     /* change font and bolden date/time to mimic ny times page */
+    font-family: 'Helvetica Neue', serif;
+    font-weight: bold;
+}
+
+nav {       /* formats nav bar list into flex format in an evenly spaced row*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#doubleBorder { /* formats border underneath navbar to resemble the one under title*/
+    border-bottom: solid black;
+    border-width: thin;
+    margin-bottom: 30px;
+}
+
+#title {    /* enlarge title, change to newly downloaded font, make dark to resemble ny times page*/
+    font-family: 'Chomsky-8MOa2', serif;
+    color: black;
+    font-size: 80px;
+}
+
+#column1 {  /* text in columns 1-3 will be in Georgia font with borders at column intersections*/
+    font-family: 'Georgia', serif;
+    border-right: solid black;
+    border-width: thin;     /*thin border*/
+    padding: 20px;
+}
+
+/* Reference
+    w3schools - syntax and strategy for adjusting image width in css
+    (https://www.w3schools.com/css/css_rwd_images.asp) */
+
+#column1 img {  /* add spacing/padding around images in the first column*/
+    width: 100%;
+    padding: 10px;
+}
+
+#uno strong {   /* center article 1 title under picture*/
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    padding: 10px;
+}
+
+#unoText {  /* placeholder text to mimic ny times article content, change text color to greyish*/
+    color: rgb(80, 80, 80);
+    border-bottom: solid black;
+    border-width: thin;
+    padding-bottom: 20px;
+}
+
+#column2 {  /* text in columns 1-3 will be in Georgia font with borders at column intersections*/
+    font-family: 'Georgia', serif;
+    border-right: solid black;
+    border-width: thin; /*thin border */
+    padding: 20px;
+}
+
+#column2 img {  /* add spacing/padding around images in the second column*/
+    width: 100%;
+    padding-top: 20px;
+}
+
+#dosImage {       /* accesses the article 2 picture to make sure a border is placed underneath, but not for the article 5 picture*/
+    padding-bottom: 20px;
+    border-bottom: solid black;
+    border-width: thin;
+}
+
+#dos strong {   /* center article 2 title under picture*/
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    padding: 10px;
+}
+
+#dosText {  /* change text color to greyish*/
+    color: rgb(80, 80, 80);
+}
+
+#column3 {  /* text in column 2 will be in Georgia font, border handling is done in other areas*/
+    font-family: 'Georgia', serif;
+    padding: 20px;
+}
+
+#column3 img {  /* add spacing/padding around images in the third column*/
+    width: 100%;
+    padding: 10px;
+}
+
+#tres strong {  /* center article 3 title under picture*/
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    padding: 10px;
+}
+
+#tresText { /* placeholder text to mimic ny times article content, change text color to greyish*/
+    color: rgb(80, 80, 80);
+    border-bottom: solid black;
+    border-width: thin;
+    padding-bottom: 20px;
+}
+
+#quatro strong {  /* center article 4 title under picture*/
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    padding: 10px;
+}
+
+#quatroImage {  /*add border underneath article 4 picture and format*/
+    border-bottom: solid black;
+    border-width: thin;
+}
+
+#quatroText { /* change text color to greyish*/
+    color: rgb(80, 80, 80);
+}
+
+#cinco strong {  /* center article 5 title under picture*/
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    padding: 10px;
+}
+
+#cincoText { /* placeholder text to mimic ny times article content, change text color to greyish*/
+    color: rgb(80, 80, 80);
+    border-bottom: solid black;
+    border-width: thin;
+    padding-bottom: 20px;
+}
+
+#seis strong {   /* center article 6 title under picture*/
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    padding: 10px;
+}
+
+#seisText {  /* change text color to greyish*/
+    color: rgb(80, 80, 80);
+}
+
+#seisImage {   /*add border underneath article 6 picture and format*/
+    border-bottom: solid black;
+    border-width: thin;
+    
+}
+
+footer {    /*add thin border underneath footer, also format footer contents into flex boxes*/
+    border-bottom: solid black;
+    border-width: thin;
+    padding-top: 50px;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Reference
+    w3schools - for inspiration and syntax for implementing grid-template-areas and media only breakpoints
+    (https://www.w3schools.com/css/tryit.asp?filename=tryresponsive_breakpoints2)
+    (https://www.w3schools.com/css/css_rwd_mediaqueries.asp) */
+
+/* for screens >1024px like laptops/desktops, will show contents in three columns*/
+@media only screen and (min-width: 1025px) {
+    #h2 {
+        display: grid;
+        /*grid layout of columns on page*/
+        grid-template-areas:
+            'column1 column2 column3';
+    }
+}
+
+/* for screens between 768px and 1024px (tablets), will show contents in two columns*/
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    #h2 {
+        display: grid;
+        /*grid layout of columns on page, column4 was just added for formatting purposes we don't use it anywhere else*/
+        grid-template-areas:
+            'column1 column2'
+            'column3 column4';
+    }
+}
+
+/* for screens <768px (phones), will show contents in one column*/
+@media only screen and (max-width: 767px) {
+    #h2 {
+        display: grid;
+        /*grid layout of columns on page*/
+        grid-template-areas:
+            'column1'
+            'column2'
+            'column3';
+    }
+}
